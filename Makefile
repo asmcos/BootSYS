@@ -17,7 +17,7 @@ BUILD_DIR = target/riscv64imac-unknown-none-elf/$(PROFILE)
 ELF = $(BUILD_DIR)/$(TARGET)
 OUT_DIR = out/$(BOARD)
 
-.PHONY: all release debug clean disasm size bin help
+.PHONY: all release debug clean disasm size bin help color-check
 
 all: release
 
@@ -27,6 +27,7 @@ help:
 	@echo "  make BOARD=k230       Select board (feature board-k230)"
 	@echo "  make debug            Debug build + .bin"
 	@echo "  make disasm           Dump disassembly"
+	@echo "  make color-check      Host ANSI color probe (PC terminal)"
 	@echo "  make clean            Remove build artifacts"
 
 release: bin
@@ -58,5 +59,9 @@ size: $(ELF)
 clean:
 	$(CARGO) clean
 	rm -rf out;rm -f Cargo.lock
+
+# Host-only: verify ANSI colors in the PC terminal (same escapes as firmware).
+color-check:
+	cd tools/color-check && $(CARGO) run --target x86_64-unknown-linux-gnu
 
 force: ;

@@ -17,8 +17,8 @@ impl Board for K230Board {
             uart_clock_hz: 48_600_000,
             uart_baud: 115_200,
             ansi_color: true,
-            // Serial tools often ignore classic 16-color; use truecolor like modern TUIs.
-            color_mode: ColorMode::TrueColor,
+            // Use classic 16-color — what minicom -c on hard-codes / supports best.
+            color_mode: ColorMode::Ansi16,
         }
     }
 }

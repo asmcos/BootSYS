@@ -41,7 +41,6 @@ pub extern "C" fn rust_main() -> ! {
         set_console(console);
     }
 
-    // TUI-style boot panel (Unicode box + icons). Terminal must be UTF-8.
     print_boot_panel(&info);
 
     loop {
