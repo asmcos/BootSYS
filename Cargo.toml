@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/bootsys-core",
+    "crates/bootsys",
+    "boards/k230",
+]
+default-members = ["crates/bootsys"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["BootSYS Contributors"]
+
+[workspace.dependencies]
+bootsys-core = { path = "crates/bootsys-core" }

@@ -1,0 +1,20 @@
+[package]
+name = "bootsys"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "BootSYS framework — RISC-V low-level verification system"
+
+[[bin]]
+name = "bootsys"
+path = "src/main.rs"
+
+[features]
+default = ["board-k230"]
+board-k230 = ["dep:bootsys-board-k230"]
+
+[dependencies]
+bootsys-core = { workspace = true }
+bootsys-board-k230 = { path = "../../boards/k230", optional = true }
+
+[build-dependencies]

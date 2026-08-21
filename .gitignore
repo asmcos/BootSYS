@@ -1,0 +1,12 @@
+/target/
+/out/
+**/*.rs.bk
+Cargo.lock
+.idea/
+.vscode/
+*.elf
+*.bin
+*.map
+*.o
+*.s
+!boards/**/src/*.S
