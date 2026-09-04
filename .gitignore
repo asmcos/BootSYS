@@ -6,5 +6,9 @@
 *.map
 *.o
 *.s
-!boards/**/*.S
-!examples/**/*.S
+!**/arch/**/*.S
+!01-base-boot/*.S
+!02-multi-cpu/arch/**/*.S
+
+# Machine-local helpers (do not push)
+/cp_bin.sh
