@@ -1,38 +1,38 @@
 # BootSYS
 
-RISC-V 底层验证固件（**不是** OS，也**不是** bootloader）。纯 C + ASM，按目录递进。
+## 什么是 BootSYS
+
+BootSYS 是在机器开机后，通过 JTAG 烧写到 RAM，或由引导设备加载后执行的程序。  
+它**不是** bootloader，也**不是**操作系统，而是一个裸机程序。
+
+## 为什么要写 BootSYS？
+
+在实际开发芯片和开发板的过程中，工程师需要验证 CPU、SoC 或设备驱动的能力，以及设备本身是否工作正常。  
+复杂的操作系统有时会干扰判断；这时可以用 BootSYS 较轻松地验证 CPU 的某些能力或设备驱动是否正常。
+
+## 我们支持哪些硬件？
+
+项目启动时验证的是平头哥 C908 与 K230 板卡。计划中将支持其他 RISC-V 芯片以及 ARM 体系的开发板。
+
+## 多个硬件可以验证吗？
+
+开发时一般是单设备、单 CPU 验证。若要验证两个设备同时工作会不会互相干扰，这时可能需要同时启动多个核，每个核运行一个例程。  
+这类验证远不及操作系统复杂，只能做简单验证，辅助判断。
+
+---
 
 工具链：`riscv64-*-gcc`（详见 [docs/ENV_SETUP_UBUNTU_CN.md](docs/ENV_SETUP_UBUNTU_CN.md)）。  
 文档总索引：[docs/README.md](docs/README.md)。  
 若前缀不同：`make CROSS_COMPILE=riscv64-linux-gnu-`。
 
-## 编译项目
-
-进入对应目录执行 `make`：
+## 编译
 
 ```bash
-make -C 01-base-boot
-make -C 02-multi-cpu
-make -C 03-exception
+make -C <NN-项目名>          # 例：make -C 01-base-boot
+# → out/<NN-项目名>/bootsys.bin   @ 0x80200000
 ```
 
-可选：`make -C 02-multi-cpu LOAD=ddr`（需 DRAM 已初始化）。
-
-## 编译结果
-
-| 项目 | 产物路径 | 加载地址 |
-|------|----------|----------|
-| 01 | `out/01-base-boot/bootsys.bin` | `0x80200000` |
-| 02 | `out/02-multi-cpu/bootsys.bin` | `0x80200000` |
-| 03 | `out/03-exception/bootsys.bin` | `0x80200000` |
-
-本机拷贝（脚本不入库）：
-
-```bash
-./cp_bin.sh 01-base-boot
-./cp_bin.sh 02-multi-cpu
-./cp_bin.sh 03-exception
-```
+部分项目可选 `LOAD=ddr`（需 DRAM 已初始化），见对应目录说明。
 
 ## 项目与文档
 
