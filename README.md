@@ -1,28 +1,25 @@
 # BootSYS — RISC-V 底层验证系统（非 OS / 非 bootloader）
 
-**纯 C + ASM**。
+**纯 C + ASM**。按实验递进（见 [docs/EXPERIMENTS_CN.md](docs/EXPERIMENTS_CN.md)）。
+
+## 实验
+
+| # | 内容 | 构建 | Tag |
+|---|------|------|-----|
+| 1 | 最小启动 + 串口（仅 CPU0） | `make exp1` | `exp1-uart-boot` |
+| 2 | 多核运行 demo | `make BOARD=k230` | `exp2-multi-cpu` |
 
 ## 目录
 
 ```
 BootSYS/
-├── arch/riscv/          # 启动 / cache（ASM）
-├── src/                 # 主程序与共享协议（banner / shmem / hart1）
-├── boards/k230/         # 板级 HAL + linker.ld
+├── experiments/01-uart-boot/   # 实验一（纯净、自洽）
+├── arch/ / src/ / boards/k230/ # 当前主树（多核）
 ├── docs/
 └── Makefile
 ```
 
-## 构建
+## 环境
 
-```bash
-make BOARD=k230          # SRAM @ 0x80200000 → out/k230/bootsys.bin
-make LOAD=ddr            # DDR 链接（需 DRAM 已初始化）
-./cp_bin.sh
-```
-
-需要：`riscv64-*-gcc`（或 `make CROSS_COMPILE=riscv64-linux-gnu-`）。
-
-说明：
-- [docs/K230_DUAL_CORE_CN.md](docs/K230_DUAL_CORE_CN.md)
-- [docs/ENV_SETUP_UBUNTU_CN.md](docs/ENV_SETUP_UBUNTU_CN.md)
+交叉编译：`riscv64-*-gcc`（或 `make CROSS_COMPILE=riscv64-linux-gnu-`）。  
+说明：[docs/ENV_SETUP_UBUNTU_CN.md](docs/ENV_SETUP_UBUNTU_CN.md)

@@ -72,16 +72,16 @@ TARGET = bootsys
 ELF    = $(OUT_DIR)/$(TARGET).elf
 BIN    = $(OUT_DIR)/$(TARGET).bin
 
-.PHONY: all release bin clean disasm size help ddr
+.PHONY: all release bin clean disasm size help ddr exp1
 
 all: release
 
 help:
 	@echo "BootSYS targets:"
-	@echo "  make / make BOARD=k230   Build -> out/$(BOARD)/bootsys.bin"
-	@echo "  make LOAD=ddr            Link for DDR (boards/k230/linker_ddr.ld)"
-	@echo "  make disasm              Disassemble"
-	@echo "  make clean               Remove out/"
+	@echo "  make / make BOARD=k230   Multi-cpu demo -> out/k230/bootsys.bin  (exp2)"
+	@echo "  make exp1               UART-only boot  -> out/exp01/bootsys.bin (exp1)"
+	@echo "  make LOAD=ddr           Link multi-cpu for DDR"
+	@echo "  make disasm / clean"
 
 release: bin
 
@@ -115,5 +115,9 @@ size: $(ELF)
 ddr:
 	$(MAKE) LOAD=ddr
 
+exp1:
+	$(MAKE) -C experiments/01-uart-boot
+
 clean:
 	rm -rf $(ROOT)/out
+	$(MAKE) -C experiments/01-uart-boot clean || true
