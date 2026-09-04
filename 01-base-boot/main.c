@@ -9,14 +9,14 @@ static void print_banner(void)
 {
 	uart_puts("\r\n");
 	uart_puts("╭──────────────────────────────────────────────╮\r\n");
-	uart_puts("│  BootSYS  ·  01-base-boot                     │\r\n");
+	uart_puts("│  BootSYS  ·  01-base-boot                    │\r\n");
 	uart_puts("│  minimal boot + UART (CPU0 only)             │\r\n");
 	uart_puts("├──────────────────────────────────────────────┤\r\n");
 	uart_puts("│  board   K230                                │\r\n");
 	uart_puts("│  load    0x80200000                          │\r\n");
 	uart_puts("│  uart0   0x91400000  115200                  │\r\n");
-	uart_puts("│  build   " __DATE__ " " __TIME__ "                  │\r\n");
-	uart_puts("│  git     " BOOTSYS_GIT "\r\n");
+	uart_puts("│  build   " __DATE__ " " __TIME__ "                │\r\n");
+	uart_puts("│  git     " BOOTSYS_GIT "                             │\r\n");
 	uart_puts("│  status  ready — type to echo                │\r\n");
 	uart_puts("╰──────────────────────────────────────────────╯\r\n");
 	uart_puts("\r\n");
