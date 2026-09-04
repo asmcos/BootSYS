@@ -1,16 +1,17 @@
-# Experiment 01 — minimal UART boot (CPU0 only)
+# 01-base-boot — CPU0 最小启动 + 串口
 #
-#   make                 -> ../../out/exp01/bootsys.bin
-#   make CROSS_COMPILE=riscv64-linux-gnu-
+#   cd 01-base-boot && make
+#   → ../out/01-base-boot/bootsys.bin
 
 CROSS_COMPILE ?= riscv64-unknown-linux-gnu-
 CC      = $(CROSS_COMPILE)gcc
 OBJCOPY = $(CROSS_COMPILE)objcopy
 SIZE    = $(CROSS_COMPILE)size
 
-ROOT    = $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../..)
-OUT_DIR = $(ROOT)/out/exp01
-GIT_REV = $(shell git -C $(ROOT) rev-parse --short HEAD 2>/dev/null || echo none)
+HERE    = $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+REPO    = $(abspath $(HERE)/..)
+OUT_DIR = $(REPO)/out/01-base-boot
+GIT_REV = $(shell git -C $(REPO) rev-parse --short HEAD 2>/dev/null || echo none)
 
 ARCH_FLAGS = -march=rv64imac -mabi=lp64 -mcmodel=medany
 CFLAGS  = $(ARCH_FLAGS) -nostdlib -nostartfiles -ffreestanding \
@@ -19,8 +20,7 @@ CFLAGS  = $(ARCH_FLAGS) -nostdlib -nostartfiles -ffreestanding \
 LDFLAGS = $(ARCH_FLAGS) -nostdlib -nostartfiles -Wl,--gc-sections -T linker.ld
 
 SRCS = start.S cache.S uart.c main.c
-OBJS = $(SRCS:.c=.o)
-OBJS := $(OBJS:.S=.o)
+OBJS = $(patsubst %.S,%.o,$(patsubst %.c,%.o,$(SRCS)))
 
 .PHONY: all clean bin
 
@@ -32,7 +32,6 @@ $(OUT_DIR)/bootsys.bin: bootsys.elf
 	@mkdir -p $(OUT_DIR)
 	$(OBJCOPY) -O binary $< $@
 	cp -f $< $(OUT_DIR)/bootsys.elf
-	@echo "=> $(OUT_DIR)/bootsys.elf"
 	@echo "=> $(OUT_DIR)/bootsys.bin"
 
 bootsys.elf: $(OBJS)
@@ -47,3 +46,4 @@ bootsys.elf: $(OBJS)
 
 clean:
 	rm -f $(OBJS) bootsys.elf
+	rm -rf $(OUT_DIR)

@@ -1,7 +1,8 @@
 # K230：从单 CPU 到多 CPU（含 CPU1 启动原理）
 
 > **范围**：BootSYS 在 Canaan K230 上的裸机双核实验  
-> **对应代码**：`arch/riscv/start.S`、`src/main.c`、`boards/k230/cpu1.c`、`src/hart1_main.c`  
+> **对应代码**：`02-multi-cpu/`（`arch/riscv/start.S`、`src/main.c`、`boards/k230/cpu1.c`、`src/hart1_main.c`）  
+> **前置**：[`01-base-boot`](../../01-base-boot/docs/BASE_BOOT_CN.md)（仅 CPU0 + 串口）  
 > **参考**：K230 TRM；Canaan U-Boot `de_reset_big_core` / `boot_baremetal`
 
 本文说明：**为什么上电只有一核在跑**，以及 **CPU0 如何把 CPU1 放到指定地址执行**。  

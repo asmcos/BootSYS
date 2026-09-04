@@ -1,25 +1,13 @@
-# BootSYS — RISC-V 底层验证系统（非 OS / 非 bootloader）
+# BootSYS
 
-**纯 C + ASM**。按实验递进（见 [docs/EXPERIMENTS_CN.md](docs/EXPERIMENTS_CN.md)）。
+RISC-V 底层验证（非 OS / 非 bootloader）。按目录递进：
 
-## 实验
+| 目录 | 内容 | 编译 |
+|------|------|------|
+| [`01-base-boot/`](01-base-boot/) | 最小启动 + 串口（仅 CPU0） | `cd 01-base-boot && make` |
+| [`02-multi-cpu/`](02-multi-cpu/) | 完整多核固件（01 之上叠加） | `cd 02-multi-cpu && make` |
 
-| # | 内容 | 构建 | Tag |
-|---|------|------|-----|
-| 1 | 最小启动 + 串口（仅 CPU0） | `make exp1` | `exp1-uart-boot` |
-| 2 | 多核运行 demo | `make BOARD=k230` | `exp2-multi-cpu` |
+产物分别在 `out/01-base-boot/`、`out/02-multi-cpu/`。
 
-## 目录
-
-```
-BootSYS/
-├── experiments/01-uart-boot/   # 实验一（纯净、自洽）
-├── arch/ / src/ / boards/k230/ # 当前主树（多核）
-├── docs/
-└── Makefile
-```
-
-## 环境
-
-交叉编译：`riscv64-*-gcc`（或 `make CROSS_COMPILE=riscv64-linux-gnu-`）。  
-说明：[docs/ENV_SETUP_UBUNTU_CN.md](docs/ENV_SETUP_UBUNTU_CN.md)
+环境简述见 [`docs/ENV_SETUP_UBUNTU_CN.md`](docs/ENV_SETUP_UBUNTU_CN.md)。  
+交叉编译器：`riscv64-*-gcc`，或 `make CROSS_COMPILE=riscv64-linux-gnu-`。

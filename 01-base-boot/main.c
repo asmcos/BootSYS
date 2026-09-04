@@ -9,7 +9,7 @@ static void print_banner(void)
 {
 	uart_puts("\r\n");
 	uart_puts("╭──────────────────────────────────────────────╮\r\n");
-	uart_puts("│  BootSYS  ·  Experiment 01                   │\r\n");
+	uart_puts("│  BootSYS  ·  01-base-boot                     │\r\n");
 	uart_puts("│  minimal boot + UART (CPU0 only)             │\r\n");
 	uart_puts("├──────────────────────────────────────────────┤\r\n");
 	uart_puts("│  board   K230                                │\r\n");
