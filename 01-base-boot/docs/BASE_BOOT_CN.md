@@ -36,4 +36,6 @@ cd 01-base-boot && make
 ## 与 02 的关系
 
 本目录是**独立纯净**的最小树。  
-`02-multi-cpu` 提供**完整**多核固件代码；阅读文档时应先完成本课，再看 02 的阶进说明。
+`02-multi-cpu` 提供**完整**多核固件代码；阅读文档时应先完成本课，再看 [MULTI_CPU_CN.md](../../02-multi-cpu/docs/MULTI_CPU_CN.md)。
+
+返回：[本目录 README](../README.md) · [文档索引](../../docs/README.md)

@@ -1,0 +1,19 @@
+# BootSYS 文档索引
+
+按子项目阅读；根目录 [README.md](../README.md) 有编译总览。
+
+## 公共
+
+| 文档 | 说明 |
+|------|------|
+| [ENV_SETUP_UBUNTU_CN.md](ENV_SETUP_UBUNTU_CN.md) | Ubuntu 交叉工具链安装 |
+
+## 子项目
+
+| 顺序 | 目录 | 文档 |
+|------|------|------|
+| **01** | [01-base-boot](../01-base-boot/) | [BASE_BOOT_CN.md](../01-base-boot/docs/BASE_BOOT_CN.md) — 最小启动 + UART |
+| **02** | [02-multi-cpu](../02-multi-cpu/) | [MULTI_CPU_CN.md](../02-multi-cpu/docs/MULTI_CPU_CN.md) — 多核阶进<br>[K230_DUAL_CORE_CN.md](../02-multi-cpu/docs/K230_DUAL_CORE_CN.md) — CPU1 原理与寄存器 |
+| **03** | [03-exception](../03-exception/) | [EXCEPTION_CN.md](../03-exception/docs/EXCEPTION_CN.md) — trap / 异常打印 |
+
+建议顺序：**环境 → 01 → 02 → 03**。

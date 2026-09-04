@@ -7,18 +7,17 @@
 ```bash
 cd 02-multi-cpu
 make
-# → ../out/02-multi-cpu/bootsys.bin
+# → ../out/02-multi-cpu/bootsys.bin   @ 0x80200000
 ```
 
-可选：`make LOAD=ddr`
-
-拷贝到 J-Link 目录：`./cp_bin.sh`（按需改路径）。
+可选：`make LOAD=ddr`（需 DRAM 已初始化）。
 
 ## 文档（阶进）
 
-1. 先完成 [`../01-base-boot/docs/BASE_BOOT_CN.md`](../01-base-boot/docs/BASE_BOOT_CN.md)
-2. 再读 [`docs/MULTI_CPU_CN.md`](docs/MULTI_CPU_CN.md)（由原双核文档整理）
-3. 细节仍见 [`docs/K230_DUAL_CORE_CN.md`](docs/K230_DUAL_CORE_CN.md)
+1. 先完成 [01 · BASE_BOOT_CN.md](../01-base-boot/docs/BASE_BOOT_CN.md)
+2. 再读 [MULTI_CPU_CN.md](docs/MULTI_CPU_CN.md)（相对 01 多出来的部分）
+3. 细节与寄存器：[K230_DUAL_CORE_CN.md](docs/K230_DUAL_CORE_CN.md)
+4. 仓库：[文档索引](../docs/README.md) · [首页](../README.md)
 
 ## 目录
 
@@ -29,3 +28,7 @@ make
 ├── src/            main、banner、shmem、hart1_main
 └── docs/
 ```
+
+## 下一课
+
+[`../03-exception/`](../03-exception/) — M-mode trap / 异常打印。

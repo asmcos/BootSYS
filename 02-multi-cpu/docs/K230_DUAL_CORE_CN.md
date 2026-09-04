@@ -7,7 +7,8 @@
 
 本文说明：**为什么上电只有一核在跑**，以及 **CPU0 如何把 CPU1 放到指定地址执行**。  
 BootSYS 不是 OS / 不是 OpenSBI；这里讲的是 **SoC 复位控制下的早起双核**，不是 Linux SMP。  
-构建：`make BOARD=k230` → `out/k230/bootsys.bin`。
+构建：`cd 02-multi-cpu && make` → `out/02-multi-cpu/bootsys.bin`。  
+阶进摘要见同目录 [MULTI_CPU_CN.md](MULTI_CPU_CN.md)。
 
 ---
 

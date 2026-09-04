@@ -8,4 +8,5 @@
 | `main.c` | banner + echo |
 | `linker.ld` | SRAM，单栈 |
 
-上级总览见仓库根 `README.md`。
+原理与验收见 [BASE_BOOT_CN.md](BASE_BOOT_CN.md)。  
+上级总览：[仓库首页](../../README.md) · [文档索引](../../docs/README.md)。

@@ -3,6 +3,7 @@
 RISC-V 底层验证固件（**不是** OS，也**不是** bootloader）。纯 C + ASM，按目录递进。
 
 工具链：`riscv64-*-gcc`（详见 [docs/ENV_SETUP_UBUNTU_CN.md](docs/ENV_SETUP_UBUNTU_CN.md)）。  
+文档总索引：[docs/README.md](docs/README.md)。  
 若前缀不同：`make CROSS_COMPILE=riscv64-linux-gnu-`。
 
 ## 编译项目
@@ -33,10 +34,10 @@ make -C 03-exception
 ./cp_bin.sh 03-exception
 ```
 
-## 项目列表
+## 项目与文档
 
-| 目录 | 含义 |
-|------|------|
-| **01-base-boot** | 最小启动 + UART（仅 CPU0）。 |
-| **02-multi-cpu** | 多核：CPU1 拉起、shmem、菜单、tick（完整固件）。 |
-| **03-exception** | 异常实验：访问故障 / 除零探测 / 非法指令，打印 CSR 与寄存器。 |
+| 目录 | 含义 | 文档 |
+|------|------|------|
+| **[01-base-boot](01-base-boot/)** | 最小启动 + UART（仅 CPU0） | [BASE_BOOT_CN.md](01-base-boot/docs/BASE_BOOT_CN.md) |
+| **[02-multi-cpu](02-multi-cpu/)** | 多核：CPU1、shmem、菜单、tick | [MULTI_CPU_CN.md](02-multi-cpu/docs/MULTI_CPU_CN.md) · [K230_DUAL_CORE_CN.md](02-multi-cpu/docs/K230_DUAL_CORE_CN.md) |
+| **[03-exception](03-exception/)** | 异常实验：access fault / 除零探测 / 非法指令 | [EXCEPTION_CN.md](03-exception/docs/EXCEPTION_CN.md) |

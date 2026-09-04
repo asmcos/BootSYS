@@ -14,8 +14,9 @@ make
 ## 文档
 
 - [docs/BASE_BOOT_CN.md](docs/BASE_BOOT_CN.md) — 原理与验收
-- [docs/README.md](docs/README.md) — 本目录说明
+- [docs/README.md](docs/README.md) — 本目录文件说明
+- 仓库：[文档索引](../docs/README.md) · [首页](../README.md)
 
 ## 下一课
 
-`../02-multi-cpu/` — 在本能力上叠加 CPU1（代码为完整固件，文档阶进）。
+[`../02-multi-cpu/`](../02-multi-cpu/) — 在本能力上叠加 CPU1。
