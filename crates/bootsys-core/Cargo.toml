@@ -1,8 +1,0 @@
-[package]
-name = "bootsys-core"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "Shared HAL primitives for BootSYS RISC-V verification system"
-
-[dependencies]

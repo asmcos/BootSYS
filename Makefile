@@ -1,67 +1,119 @@
 # ==============================================
-# BootSYS — RISC-V low-level verification system
+# BootSYS — RISC-V low-level verification (C)
 # ==============================================
+#
+# Layout:
+#   arch/riscv/     early boot + cache (ASM)
+#   src/            app / shared protocol
+#   boards/<board>/ board HAL + linker
+#   docs/
 
-BOARD ?= k230
-TARGET = bootsys
-BOARD_FEATURE = board-$(BOARD)
-
+BOARD         ?= k230
 CROSS_COMPILE ?= riscv64-unknown-linux-gnu-
+LOAD          ?= sram
+
+CC      = $(CROSS_COMPILE)gcc
 OBJCOPY = $(CROSS_COMPILE)objcopy
 OBJDUMP = $(CROSS_COMPILE)objdump
-READELF = $(CROSS_COMPILE)readelf
+SIZE    = $(CROSS_COMPILE)size
 
-CARGO ?= cargo
-PROFILE ?= release
-BUILD_DIR = target/riscv64imac-unknown-none-elf/$(PROFILE)
-ELF = $(BUILD_DIR)/$(TARGET)
-OUT_DIR = out/$(BOARD)
+ROOT    := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+OUT_DIR := $(ROOT)/out/$(BOARD)
+OBJ_DIR := $(OUT_DIR)/obj
+GIT_REV := $(shell git -C $(ROOT) rev-parse --short HEAD 2>/dev/null || echo none)
 
-.PHONY: all release debug clean disasm size bin help color-check
+BOARD_DIR := $(ROOT)/boards/$(BOARD)
+ARCH_DIR  := $(ROOT)/arch/riscv
+SRC_DIR   := $(ROOT)/src
+
+ifeq ($(LOAD),ddr)
+  LDSCRIPT := $(BOARD_DIR)/linker_ddr.ld
+  CFLAGS_LOAD := -DLOAD_DDR
+else
+  LDSCRIPT := $(BOARD_DIR)/linker.ld
+  CFLAGS_LOAD :=
+endif
+
+ARCH_FLAGS = -march=rv64imac -mabi=lp64 -mcmodel=medany
+INCLUDES   = -I$(BOARD_DIR) -I$(SRC_DIR)
+CFLAGS     = $(ARCH_FLAGS) -nostdlib -nostartfiles -ffreestanding \
+             -fno-builtin -msmall-data-limit=0 -O2 -Wall -Wextra \
+             $(INCLUDES) $(CFLAGS_LOAD) \
+             -DBOOTSYS_VERSION=\"0.1.0\" \
+             -DBOOTSYS_GIT=\"$(GIT_REV)\"
+LDFLAGS    = $(ARCH_FLAGS) -nostdlib -nostartfiles -Wl,--gc-sections \
+             -T $(LDSCRIPT)
+
+# --- sources ---
+ARCH_SRCS = $(ARCH_DIR)/start.S $(ARCH_DIR)/cache.S
+
+SRC_SRCS  = $(SRC_DIR)/main.c \
+            $(SRC_DIR)/banner.c \
+            $(SRC_DIR)/hart1_main.c \
+            $(SRC_DIR)/shmem.c
+
+BOARD_SRCS = $(BOARD_DIR)/sysctl.c \
+             $(BOARD_DIR)/cache_image.c \
+             $(BOARD_DIR)/uart.c \
+             $(BOARD_DIR)/clint.c \
+             $(BOARD_DIR)/cpu1.c \
+             $(BOARD_DIR)/cpu1_status.c
+
+ALL_SRCS = $(ARCH_SRCS) $(SRC_SRCS) $(BOARD_SRCS)
+
+# Map each source to out/<board>/obj/<name>.o
+OBJS = $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(basename $(notdir $(ALL_SRCS)))))
+
+# VPATH so %.o can find sources in multiple dirs
+vpath %.c $(SRC_DIR) $(BOARD_DIR)
+vpath %.S $(ARCH_DIR)
+
+TARGET = bootsys
+ELF    = $(OUT_DIR)/$(TARGET).elf
+BIN    = $(OUT_DIR)/$(TARGET).bin
+
+.PHONY: all release bin clean disasm size help ddr
 
 all: release
 
 help:
 	@echo "BootSYS targets:"
-	@echo "  make / make release   Build bootsys for BOARD=$(BOARD)"
-	@echo "  make BOARD=k230       Select board (feature board-k230)"
-	@echo "  make debug            Debug build + .bin"
-	@echo "  make disasm           Dump disassembly"
-	@echo "  make color-check      Host ANSI color probe (PC terminal)"
-	@echo "  make clean            Remove build artifacts"
+	@echo "  make / make BOARD=k230   Build -> out/$(BOARD)/bootsys.bin"
+	@echo "  make LOAD=ddr            Link for DDR (boards/k230/linker_ddr.ld)"
+	@echo "  make disasm              Disassemble"
+	@echo "  make clean               Remove out/"
 
 release: bin
 
-bin: $(OUT_DIR)/$(TARGET).bin
+bin: $(BIN)
 
-$(OUT_DIR)/$(TARGET).bin: $(ELF)
-	@mkdir -p $(OUT_DIR)
+$(BIN): $(ELF)
 	$(OBJCOPY) -O binary $< $@
-	@cp -f $< $(OUT_DIR)/$(TARGET).elf
-	@echo "=> $(OUT_DIR)/$(TARGET).elf"
-	@echo "=> $(OUT_DIR)/$(TARGET).bin"
+	@echo "=> $(ELF)"
+	@echo "=> $(BIN)"
 
-$(ELF): force
-	$(CARGO) build -p bootsys --no-default-features --features $(BOARD_FEATURE) --$(PROFILE)
+$(ELF): $(OBJS) $(LDSCRIPT)
+	@mkdir -p $(OUT_DIR)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS)
+	@$(SIZE) $@
 
-debug:
-	$(MAKE) PROFILE=debug bin
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJ_DIR)/%.o: %.S
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 disasm: $(ELF)
-	@mkdir -p $(OUT_DIR)
 	$(OBJDUMP) -d $< > $(OUT_DIR)/$(TARGET).s
 	@echo "=> $(OUT_DIR)/$(TARGET).s"
 
 size: $(ELF)
-	$(READELF) -h $<
-	@$(CROSS_COMPILE)size $<
+	$(SIZE) $<
+
+ddr:
+	$(MAKE) LOAD=ddr
 
 clean:
-	$(CARGO) clean
-	rm -rf out;rm -f Cargo.lock
-
-# Host-only: verify ANSI colors in the PC terminal (same escapes as firmware).
-color-check:
-	cd tools/color-check && $(CARGO) run --target x86_64-unknown-linux-gnu
-
-force: ;
+	rm -rf $(ROOT)/out

@@ -1,7 +1,4 @@
-/target/
 /out/
-**/*.rs.bk
-Cargo.lock
 .idea/
 .vscode/
 *.elf
@@ -9,4 +6,5 @@ Cargo.lock
 *.map
 *.o
 *.s
-!boards/**/src/*.S
+!boards/**/*.S
+!examples/**/*.S

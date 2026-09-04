@@ -1,9 +1,0 @@
-[package]
-name = "bootsys-board-k230"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "BootSYS board information for Canaan K230"
-
-[dependencies]
-bootsys-core = { workspace = true }

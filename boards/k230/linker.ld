@@ -1,8 +1,3 @@
-/* ==============================================
- * BootSYS K230 linker script
- * Layout mirrors riscvboot for K230 SRAM bring-up.
- * ============================================== */
-
 OUTPUT_ARCH("riscv")
 ENTRY(_start)
 
@@ -21,10 +16,6 @@ SECTIONS {
     .text : {
         *(.text.init)
         *(.text .text.*)
-        /* Keep a clear gap before .rodata so a bad jump cannot land in strings. */
-        . = ALIGN(64);
-        BYTE(0x01); BYTE(0x00); /* c.nop */
-        BYTE(0x01); BYTE(0x00);
         . = ALIGN(8);
     } > ROM
 
@@ -39,6 +30,17 @@ SECTIONS {
         . = ALIGN(8);
         PROVIDE(__data_load_start = .);
     } > ROM AT> ROM
+
+    /*
+     * Match k230-minimal: shmem at RAM base 0x80220000 (CPU1 ASM writes here).
+     * Keep 64 bytes reserved so .data does not overlap.
+     */
+    .cpu1_shmem (NOLOAD) : {
+        . = ALIGN(8);
+        PROVIDE(_cpu1_shmem = .);
+        . += 64;
+        . = ALIGN(16);
+    } > RAM
 
     .dalign : {
         . = ALIGN(8);
@@ -66,20 +68,20 @@ SECTIONS {
         . = ALIGN(16);
     } > RAM
 
-    /*
-     * Heap grows up; stack sits at RAM top growing down.
-     * Leave a 4 KiB guard between heap end and stack base.
-     */
     .heap (NOLOAD) : {
         . = ALIGN(16);
         _heap_start = .;
-        . = ORIGIN(RAM) + LENGTH(RAM) - 0x1000 - 0x1000;
+        . = ORIGIN(RAM) + LENGTH(RAM) - 0x2000;
         _heap_end = .;
     } > RAM
 
     .stack (NOLOAD) : {
         . = ALIGN(16);
-        . = ORIGIN(RAM) + LENGTH(RAM) - 0x1000;
+        /* Same as k230-minimal: _sp1 then _sp, 4K each */
+        . = ORIGIN(RAM) + LENGTH(RAM) - 0x2000;
+        _stack1_start = .;
+        . += 0x1000;
+        PROVIDE(_sp1 = .);
         _stack_start = .;
         . += 0x1000;
         _stack_end = .;
