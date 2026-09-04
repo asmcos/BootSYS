@@ -11,7 +11,7 @@
 | 单栈 `_sp` | CPU1 栈 `_sp1`、shmem @ `0x80220000` |
 | — | RMU：`rstvec` + `CPU1_RST_CTL` 解复位 |
 | — | CLINT MSIP / IPI 探测 |
-| 回显 | 菜单：`s/r/1/2/3/i/c/q` + `[cpu1] tick` |
+| 回显 | 菜单：`s/1/2/3/i/c/q` + `[cpu1] tick` |
 
 ## 建议学习顺序
 

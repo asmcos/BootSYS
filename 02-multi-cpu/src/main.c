@@ -40,7 +40,6 @@ static void print_help(void)
 	uart_puts("\r\n");
 	uart_puts("======= menu =======\r\n");
 	uart_puts("  s  status\r\n");
-	uart_puts("  r  reboot cpu1\r\n");
 	uart_puts("  1  run\r\n");
 	uart_puts("  2  soft-loop\r\n");
 	uart_puts("  3  wfi\r\n");
@@ -85,23 +84,6 @@ static void ipi_probe(void)
 	uart_puts("->");
 	uart_putdec32(cpu1_shmem->ipi_seen);
 	uart_puts("\r\n");
-}
-
-static void re_boot_cpu1(void)
-{
-	uint32_t entry = (uint32_t)(uintptr_t)_hart1_entry;
-	struct cpu1_boot_result br;
-
-	shmem_init();
-	clint_ipi_clear_cpu1();
-	flush_image_cache();
-	br = cpu1_boot(entry);
-	report_boot_result(&br);
-	if (wait_cpu1_alive(800))
-		uart_puts("cpu1: ok\r\n");
-	else
-		uart_puts("cpu1: no shmem\r\n");
-	shmem_cpu0_console_ready();
 }
 
 static void park_for_jlink(void)
@@ -162,10 +144,6 @@ int main(void)
 		case 'S':
 			cpu1_dump_status("s");
 			print_sw_status();
-			break;
-		case 'r':
-		case 'R':
-			re_boot_cpu1();
 			break;
 		case '1':
 			shmem_cpu0_cmd(CPU1_CMD_GO_RUNNING);
