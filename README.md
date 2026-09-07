@@ -41,3 +41,4 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[01-base-boot](01-base-boot/)** | 最小启动 + UART（仅 CPU0） | [BASE_BOOT_CN.md](01-base-boot/docs/BASE_BOOT_CN.md) |
 | **[02-multi-cpu](02-multi-cpu/)** | 多核：CPU1、shmem、菜单、tick | [MULTI_CPU_CN.md](02-multi-cpu/docs/MULTI_CPU_CN.md) · [K230_DUAL_CORE_CN.md](02-multi-cpu/docs/K230_DUAL_CORE_CN.md) |
 | **[03-exception](03-exception/)** | 异常实验：access fault / 除零探测 / 非法指令 | [EXCEPTION_CN.md](03-exception/docs/EXCEPTION_CN.md) |
+| **[04-privilege](04-privilege/)** | 特权级：M / S / U 切换与权限验证 | [PRIVILEGE_CN.md](04-privilege/docs/PRIVILEGE_CN.md)（含 ecall/`mcause` 说明） |

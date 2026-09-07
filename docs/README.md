@@ -15,5 +15,6 @@
 | **01** | [01-base-boot](../01-base-boot/) | [BASE_BOOT_CN.md](../01-base-boot/docs/BASE_BOOT_CN.md) — 最小启动 + UART |
 | **02** | [02-multi-cpu](../02-multi-cpu/) | [MULTI_CPU_CN.md](../02-multi-cpu/docs/MULTI_CPU_CN.md) — 多核阶进<br>[K230_DUAL_CORE_CN.md](../02-multi-cpu/docs/K230_DUAL_CORE_CN.md) — CPU1 原理与寄存器 |
 | **03** | [03-exception](../03-exception/) | [EXCEPTION_CN.md](../03-exception/docs/EXCEPTION_CN.md) — trap / 异常打印 |
+| **04** | [04-privilege](../04-privilege/) | [PRIVILEGE_CN.md](../04-privilege/docs/PRIVILEGE_CN.md) — M / S / U 切换与权限 |
 
-建议顺序：**环境 → 01 → 02 → 03**。
+建议顺序：**环境 → 01 → 02 → 03 → 04**。

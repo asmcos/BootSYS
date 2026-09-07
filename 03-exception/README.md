@@ -26,3 +26,7 @@ cd 03-exception && make
 - [docs/EXCEPTION_CN.md](docs/EXCEPTION_CN.md) — 原理与关键文件
 - 前置：[01](../01-base-boot/docs/BASE_BOOT_CN.md) · [02](../02-multi-cpu/docs/MULTI_CPU_CN.md)
 - 仓库：[文档索引](../docs/README.md) · [首页](../README.md)
+
+## 下一课
+
+[`../04-privilege/`](../04-privilege/) — M / S / U 特权级切换与权限验证。
