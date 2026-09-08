@@ -43,3 +43,5 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[03-exception](03-exception/)** | 异常实验：access fault / 除零探测 / 非法指令 | [EXCEPTION_CN.md](03-exception/docs/EXCEPTION_CN.md) |
 | **[04-privilege](04-privilege/)** | 特权级：M / S / U 切换与权限验证 | [PRIVILEGE_CN.md](04-privilege/docs/PRIVILEGE_CN.md)（含 ecall/`mcause` 说明） |
 | **[05-pmp](05-pmp/)** | PMP：设保护区测 M/S/U，取消后再测 | [PMP_CN.md](05-pmp/docs/PMP_CN.md) |
+| **[06-tlb](06-tlb/)** | Sv39 页表 / TLB：映射、缺页、sfence.vma | [TLB_CN.md](06-tlb/docs/TLB_CN.md) |
+| **[07-cache](07-cache/)** | L1 cache tag dump（MCINDEX / MCINS / MCDATA） | [CACHE_CN.md](07-cache/docs/CACHE_CN.md) |

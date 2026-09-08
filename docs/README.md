@@ -17,5 +17,7 @@
 | **03** | [03-exception](../03-exception/) | [EXCEPTION_CN.md](../03-exception/docs/EXCEPTION_CN.md) — trap / 异常打印 |
 | **04** | [04-privilege](../04-privilege/) | [PRIVILEGE_CN.md](../04-privilege/docs/PRIVILEGE_CN.md) — M / S / U 切换与权限 |
 | **05** | [05-pmp](../05-pmp/) | [PMP_CN.md](../05-pmp/docs/PMP_CN.md) — 设保护 / 取消后再测 |
+| **06** | [06-tlb](../06-tlb/) | [TLB_CN.md](../06-tlb/docs/TLB_CN.md) — Sv39 / TLB / sfence.vma |
+| **07** | [07-cache](../07-cache/) | [CACHE_CN.md](../07-cache/docs/CACHE_CN.md) — L1 tag dump |
 
-建议顺序：**环境 → 01 → 02 → 03 → 04 → 05**。
+建议顺序：**环境 → 01 → 02 → 03 → 04 → 05 → 06 → 07**。

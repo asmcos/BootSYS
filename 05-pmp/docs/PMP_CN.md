@@ -41,4 +41,6 @@
 cd 05-pmp && make
 ```
 
+下一课：[06-tlb](../../06-tlb/)
+
 返回：[本目录 README](../README.md) · [文档索引](../../docs/README.md)

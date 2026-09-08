@@ -37,4 +37,5 @@ cd 05-pmp && make
 
 - [docs/PMP_CN.md](docs/PMP_CN.md)
 - 前置：[04-privilege](../04-privilege/docs/PRIVILEGE_CN.md)
+- 下一课：[06-tlb](../06-tlb/)
 - 仓库：[文档索引](../docs/README.md) · [首页](../README.md)
