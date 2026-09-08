@@ -33,3 +33,7 @@ cd 04-privilege && make
 
 - [docs/PRIVILEGE_CN.md](docs/PRIVILEGE_CN.md) — 含 **ecall 如何判定** 等问答
 - 仓库：[文档索引](../docs/README.md) · [首页](../README.md)
+
+## 下一课
+
+[`../05-pmp/`](../05-pmp/) — 设 PMP 保护区，M/S/U 测完再取消。

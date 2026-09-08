@@ -16,5 +16,6 @@
 | **02** | [02-multi-cpu](../02-multi-cpu/) | [MULTI_CPU_CN.md](../02-multi-cpu/docs/MULTI_CPU_CN.md) — 多核阶进<br>[K230_DUAL_CORE_CN.md](../02-multi-cpu/docs/K230_DUAL_CORE_CN.md) — CPU1 原理与寄存器 |
 | **03** | [03-exception](../03-exception/) | [EXCEPTION_CN.md](../03-exception/docs/EXCEPTION_CN.md) — trap / 异常打印 |
 | **04** | [04-privilege](../04-privilege/) | [PRIVILEGE_CN.md](../04-privilege/docs/PRIVILEGE_CN.md) — M / S / U 切换与权限 |
+| **05** | [05-pmp](../05-pmp/) | [PMP_CN.md](../05-pmp/docs/PMP_CN.md) — 设保护 / 取消后再测 |
 
-建议顺序：**环境 → 01 → 02 → 03 → 04**。
+建议顺序：**环境 → 01 → 02 → 03 → 04 → 05**。
