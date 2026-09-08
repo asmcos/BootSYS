@@ -26,4 +26,5 @@ cd 08-timer && make
 
 - [docs/TIMER_CN.md](docs/TIMER_CN.md)
 - 前置：[03-exception](../03-exception/docs/EXCEPTION_CN.md) · [07-cache](../07-cache/)
+- 下一课：[09-irq](../09-irq/)
 - 仓库：[文档索引](../docs/README.md)

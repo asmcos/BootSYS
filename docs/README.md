@@ -20,5 +20,6 @@
 | **06** | [06-tlb](../06-tlb/) | [TLB_CN.md](../06-tlb/docs/TLB_CN.md) — Sv39 / TLB / sfence.vma |
 | **07** | [07-cache](../07-cache/) | [CACHE_CN.md](../07-cache/docs/CACHE_CN.md) — L1 tag dump |
 | **08** | [08-timer](../08-timer/) | [TIMER_CN.md](../08-timer/docs/TIMER_CN.md) — CLINT 定时器 / 秒表 |
+| **09** | [09-irq](../09-irq/) | [IRQ_CN.md](../09-irq/docs/IRQ_CN.md) — UART RX / PLIC |
 
-建议顺序：**环境 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08**。
+建议顺序：**环境 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09**。

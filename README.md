@@ -46,3 +46,4 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[06-tlb](06-tlb/)** | Sv39 页表 / TLB：映射、缺页、sfence.vma | [TLB_CN.md](06-tlb/docs/TLB_CN.md) |
 | **[07-cache](07-cache/)** | L1 cache tag dump（MCINDEX / MCINS / MCDATA） | [CACHE_CN.md](07-cache/docs/CACHE_CN.md) |
 | **[08-timer](08-timer/)** | CLINT 定时器中断 + 串口秒表 | [TIMER_CN.md](08-timer/docs/TIMER_CN.md) |
+| **[09-irq](09-irq/)** | UART RX → PLIC 外部中断 | [IRQ_CN.md](09-irq/docs/IRQ_CN.md) |

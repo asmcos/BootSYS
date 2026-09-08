@@ -46,4 +46,6 @@ K230 标注 `clint,has-no-64bit-mmio`：64 位数拆成两次 32-bit。写比较
 cd 08-timer && make
 ```
 
+下一课：[09-irq](../../09-irq/)
+
 返回：[本目录 README](../README.md) · [文档索引](../../docs/README.md)
