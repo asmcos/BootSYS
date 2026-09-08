@@ -36,4 +36,5 @@ cd 07-cache && make
 
 - [docs/CACHE_CN.md](docs/CACHE_CN.md)
 - 前置：[06-tlb](../06-tlb/docs/TLB_CN.md)
+- 下一课：[08-timer](../08-timer/)
 - 仓库：[文档索引](../docs/README.md)

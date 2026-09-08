@@ -48,4 +48,6 @@ C908 和开源 C906 的 tag 位可能略有差别，所以菜单里 **raw 必打
 cd 07-cache && make
 ```
 
+下一课：[08-timer](../../08-timer/)
+
 返回：[本目录 README](../README.md) · [文档索引](../../docs/README.md)

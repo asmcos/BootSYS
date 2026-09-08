@@ -45,3 +45,4 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[05-pmp](05-pmp/)** | PMP：设保护区测 M/S/U，取消后再测 | [PMP_CN.md](05-pmp/docs/PMP_CN.md) |
 | **[06-tlb](06-tlb/)** | Sv39 页表 / TLB：映射、缺页、sfence.vma | [TLB_CN.md](06-tlb/docs/TLB_CN.md) |
 | **[07-cache](07-cache/)** | L1 cache tag dump（MCINDEX / MCINS / MCDATA） | [CACHE_CN.md](07-cache/docs/CACHE_CN.md) |
+| **[08-timer](08-timer/)** | CLINT 定时器中断 + 串口秒表 | [TIMER_CN.md](08-timer/docs/TIMER_CN.md) |
