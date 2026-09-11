@@ -1,7 +1,7 @@
 #include "k230.h"
 #include "trap.h"
 #include "thread.h"
-#include "shmem_log.h"
+#include "print.h"
 
 volatile int trap_skip_insn;
 
@@ -73,19 +73,14 @@ void trap_handler(struct trap_frame *tf)
 		return;
 	}
 
-	/*
-	 * M-mode ecall = software yield. Needed on CPU1: MSIP bit is visible
-	 * (lesson 02) but taking MSI/MTIP as an interrupt is unreliable.
-	 */
 	if (!interrupt && code == MCAUSE_ECALL_M) {
 		w_mepc(epc + 4);
 		sched_on_timer(tf);
 		return;
 	}
 
-	/* CPU1 must not touch UART — park a short note in the message ring. */
 	if (bootsys_cpuid() != 0) {
-		cpu1_msg("TRAP");
+		print_printf("[cpu1] TRAP");
 		if (!interrupt && trap_skip_insn) {
 			w_mepc(epc + insn_len(epc));
 			return;

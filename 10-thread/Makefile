@@ -42,7 +42,8 @@ LDFLAGS    = $(ARCH_FLAGS) -nostdlib -nostartfiles -Wl,--gc-sections \
 
 ARCH_SRCS = $(ARCH_DIR)/start.S $(ARCH_DIR)/cache.S $(ARCH_DIR)/trap_entry.S
 SRC_SRCS  = $(SRC_DIR)/main.c $(SRC_DIR)/trap.c $(SRC_DIR)/thread.c \
-            $(SRC_DIR)/hart1_main.c $(SRC_DIR)/worker.c $(SRC_DIR)/shmem_log.c
+            $(SRC_DIR)/hart1_main.c $(SRC_DIR)/worker.c $(SRC_DIR)/shmem_log.c \
+            $(SRC_DIR)/print.c
 BOARD_SRCS = $(BOARD_DIR)/sysctl.c $(BOARD_DIR)/uart.c $(BOARD_DIR)/clint.c \
              $(BOARD_DIR)/cpu1.c $(BOARD_DIR)/cpu1_status.c \
              $(BOARD_DIR)/cache_image.c

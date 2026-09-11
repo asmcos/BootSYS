@@ -2,21 +2,7 @@
 #include "thread.h"
 #include "worker.h"
 #include "shmem_log.h"
-
-static void print_line_cpu0(uint32_t tid, uint32_t n, uint32_t max)
-{
-	__asm__ volatile("csrc mstatus, %0" ::"r"(MSTATUS_MIE));
-	uart_puts("[cpu0] T");
-	uart_putdec32(tid);
-	uart_puts(" n=");
-	uart_putdec32(n);
-	uart_puts("/");
-	uart_putdec32(max);
-	uart_puts(" tick=");
-	uart_putdec32(sched_ticks());
-	uart_puts("\r\n");
-	__asm__ volatile("csrs mstatus, %0" ::"r"(MSTATUS_MIE));
-}
+#include "print.h"
 
 static uint32_t g_loops = WORKER_LOOPS_DEFAULT;
 
@@ -52,10 +38,6 @@ void worker_main(void *arg)
 	if (max == 0)
 		max = WORKER_LOOPS_DEFAULT;
 
-	/*
-	 * Gate on mtime (not sched_ticks): CPU1 may only get MSIP kicks,
-	 * but global mtime still advances. T1 offset = half period.
-	 */
 	base = clint_mtime() + (uint64_t)tid * WORKER_PHASE_MTIME;
 
 	for (n = 1; n <= max; n++) {
@@ -68,9 +50,7 @@ void worker_main(void *arg)
 				__asm__ volatile("ecall" ::: "memory");
 		}
 
-		if (cpu == 0)
-			print_line_cpu0(tid, n, max);
-		else
-			cpu1_msg_worker(tid, n, max, sched_ticks());
+		print_printf("[cpu%u] T%u n=%u/%u tick=%u",
+			     cpu, tid, n, max, sched_ticks());
 	}
 }

@@ -1,7 +1,6 @@
 # 10-thread
 
-大小核都用 **CLINT 机器定时器中断（MTIP）** 做抢占式线程切换。  
-每个 hart 自己的 `mtimecmp`、自己的就绪队列；**线程不跨核迁移**。
+大小核都用调度切换本核线程；**打印走统一 ring**，只有 CPU0 在中断/空闲里 drain 到 UART。
 
 ## 编译
 
@@ -13,24 +12,26 @@ cd 10-thread && make
 ## 操作
 
 ```text
-[M] t    先测 CPU1 消息环（无调度，不起 CPU0 worker）
-[M] p    跑一批：CPU0 直接打印；CPU1 写入 shmem，由 CPU0 取出打印
+[M] t    先测 CPU1 → print ring → CPU0 drain（探针，无调度）
+[M] p    跑一批：两核 worker 都 print_printf 入环
 [M] n    设置 N（默认 5）
 [M] s    状态
 [M] h    帮助
 ```
 
-跑完 N 次后回菜单。
-
-**CPU1 消息机制**（大核禁止直接写 UART）：
+## 打印系统
 
 ```text
-CPU1  cpu1_msg() / cpu1_msg_worker()
-        ↓  shmem log ring @ SHMEM+128
-CPU0  shmem_log_drain() → 串口打印 [cpu1] ...
+CPU0 / CPU1   print_puts / print_printf
+                 ↓  SHMEM+128 print ring (amo 入队)
+CPU0 only     print_drain_isr()  ← sched_on_timer (MTIP)
+              print_drain_all()  ← 菜单 / 等待循环
+                 ↓
+              UART
 ```
 
-菜单 `t` 只测这条通路；`p` 再跑双核线程。
+- 大核 **禁止** 直接 `uart_*`（CSR `mhartid` 两边常为 0，用 `tp`/`bootsys_cpuid` 区分）
+- 格式化在线程里完成；ISR 只搬行到串口
 
 ## 文档
 

@@ -1,5 +1,6 @@
 #include "k230.h"
 #include "thread.h"
+#include "print.h"
 
 struct hart_sched {
 	struct thread threads[THREAD_PER_HART];
@@ -208,6 +209,10 @@ void sched_on_timer(struct trap_frame *tf)
 	unsigned hart = bootsys_cpuid();
 	int next;
 
+	/* Shared print ring: only CPU0 may touch UART. */
+	if (hart == 0)
+		print_drain_isr();
+
 	s->cmp += TIMER_PERIOD;
 	clint_mtimecmp_write(hart, s->cmp);
 	s->ticks++;
@@ -218,10 +223,6 @@ void sched_on_timer(struct trap_frame *tf)
 	save_from_tf(s, tf);
 	next = pick_next(s, s->current);
 	if (next < 0) {
-		/*
-		 * No READY worker left (all DONE or none). Resume idle so
-		 * main's wait loop can see sched_all_done() and return to menu.
-		 */
 		load_to_tf(s, -1, tf);
 		return;
 	}

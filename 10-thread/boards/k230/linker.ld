@@ -34,8 +34,8 @@ SECTIONS {
     /*
      * Dual-hart mailbox at RAM base 0x80220000:
      *   +0    ctrl (alive / cpu1_done)
-     *   +64   cmd  (go / loops)
-     *   +128  log ring (~800B) — MUST stay out of .data or UART/globals corrupt.
+     *   +64   cmd  (go / loops / mode)
+     *   +128  print ring — both CPUs enqueue; CPU0 drains UART
      */
     .cpu1_shmem (NOLOAD) : {
         . = ALIGN(8);
