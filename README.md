@@ -47,3 +47,6 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[07-cache](07-cache/)** | L1 cache tag dump（MCINDEX / MCINS / MCDATA） | [CACHE_CN.md](07-cache/docs/CACHE_CN.md) |
 | **[08-timer](08-timer/)** | CLINT 定时器中断 + 串口秒表 | [TIMER_CN.md](08-timer/docs/TIMER_CN.md) |
 | **[09-irq](09-irq/)** | UART RX → PLIC 外部中断 | [IRQ_CN.md](09-irq/docs/IRQ_CN.md) |
+| **[10-thread](10-thread/)** | 双核定时器抢占线程 + print ring | [THREAD_CN.md](10-thread/docs/THREAD_CN.md) |
+| **[11-thread-comm](11-thread-comm/)** | mailbox + cache 探针（硬件是否一致） | [THREAD_COMM_CN.md](11-thread-comm/docs/THREAD_COMM_CN.md) |
+| **[12-atomic](12-atomic/)** | CPU0×2 线程：丢更新 / amoswap / amoadd | [ATOMIC_CN.md](12-atomic/docs/ATOMIC_CN.md) · [SPINLOCK_CN.md](12-atomic/docs/SPINLOCK_CN.md) |

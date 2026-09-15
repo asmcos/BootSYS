@@ -8,5 +8,5 @@
 | `main.c` | banner + echo |
 | `linker.ld` | SRAM，单栈 |
 
-原理与验收见 [BASE_BOOT_CN.md](BASE_BOOT_CN.md)。  
+原理、硬件路径与误区见 [BASE_BOOT_CN.md](BASE_BOOT_CN.md)。  
 上级总览：[仓库首页](../../README.md) · [文档索引](../../docs/README.md)。

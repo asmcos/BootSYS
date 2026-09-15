@@ -26,4 +26,5 @@ h            帮助
 
 - [docs/IRQ_CN.md](docs/IRQ_CN.md)
 - 前置：[08-timer](../08-timer/docs/TIMER_CN.md)
+- 下一课：[10-thread](../10-thread/)（规划）· 原子：[12-atomic](../12-atomic/docs/ATOMIC_CN.md)
 - 仓库：[文档索引](../docs/README.md)

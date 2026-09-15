@@ -1,6 +1,7 @@
 # 10-thread
 
-大小核都用调度切换本核线程；**打印走统一 ring**，只有 CPU0 在中断/空闲里 drain 到 UART。
+大小核都用调度切换本核线程；**打印走统一 ring**，只有 CPU0 drain 到 UART。  
+启动 logo 用 **`uart_puts`**（print ring 会截断 UTF-8 框线）。
 
 ## 编译
 
@@ -24,14 +25,14 @@ cd 10-thread && make
 ```text
 CPU0 / CPU1   print_puts / print_printf
                  ↓  SHMEM+128 print ring (amo 入队)
-CPU0 only     print_drain_isr()  ← sched_on_timer (MTIP)
+CPU0 only     print_drain_isr()  ← sched_on_timer
               print_drain_all()  ← 菜单 / 等待循环
                  ↓
               UART
 ```
 
-- 大核 **禁止** 直接 `uart_*`（CSR `mhartid` 两边常为 0，用 `tp`/`bootsys_cpuid` 区分）
-- 格式化在线程里完成；ISR 只搬行到串口
+- 大核 **禁止** 直接 `uart_*`（用 `tp` / `bootsys_cpuid` 区分；CSR `mhartid` 两边常为 0）
+- 格式化在线程里完成；ISR 搬行到串口（搬时短暂关 MIE，防字交错）
 
 ## 文档
 

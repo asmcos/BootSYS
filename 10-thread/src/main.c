@@ -11,15 +11,22 @@
 
 static int cpu1_booted;
 
+#ifndef BOOTSYS_GIT
+#define BOOTSYS_GIT "unknown"
+#endif
+
 static void banner(void)
 {
-	print_printf("");
-	print_printf("==============================================");
-	print_printf("  BootSYS  ·  10-thread");
-	print_printf("  print ring; CPU0 drain in timer IRQ");
-	print_printf("==============================================");
-	print_printf("");
-	print_drain_all();
+	/* Direct UART — print ring truncates UTF-8 box drawing. */
+	uart_puts("\r\n");
+	uart_puts("╭──────────────────────────────────────────────╮\r\n");
+	uart_puts("│  BootSYS  ·  10-thread                       │\r\n");
+	uart_puts("│  print ring; CPU0 drain in timer IRQ         │\r\n");
+	uart_puts("├──────────────────────────────────────────────┤\r\n");
+	uart_puts("│  build   " __DATE__ " " __TIME__ "                │\r\n");
+	uart_puts("│  git     " BOOTSYS_GIT "                             │\r\n");
+	uart_puts("╰──────────────────────────────────────────────╯\r\n");
+	uart_puts("\r\n");
 }
 
 static void print_help(void)

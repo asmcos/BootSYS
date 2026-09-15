@@ -21,5 +21,8 @@
 | **07** | [07-cache](../07-cache/) | [CACHE_CN.md](../07-cache/docs/CACHE_CN.md) — L1 tag dump |
 | **08** | [08-timer](../08-timer/) | [TIMER_CN.md](../08-timer/docs/TIMER_CN.md) — CLINT 定时器 / 秒表 |
 | **09** | [09-irq](../09-irq/) | [IRQ_CN.md](../09-irq/docs/IRQ_CN.md) — UART RX / PLIC |
+| **10** | [10-thread](../10-thread/) | [THREAD_CN.md](../10-thread/docs/THREAD_CN.md) — 双核定时器抢占 + print ring |
+| **11** | [11-thread-comm](../11-thread-comm/) | [THREAD_COMM_CN.md](../11-thread-comm/docs/THREAD_COMM_CN.md) — mailbox；菜单 `c` 测 L1 是否硬件一致 |
+| **12** | [12-atomic](../12-atomic/) | [ATOMIC_CN.md](../12-atomic/docs/ATOMIC_CN.md) — **CPU0×2 线程** 丢更新 / amoswap / amoadd<br>[SPINLOCK_CN.md](../12-atomic/docs/SPINLOCK_CN.md) — 自旋锁 |
 
-建议顺序：**环境 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09**。
+建议顺序：**环境 → 01 → … → 09 → 10 → 11 → 12**。

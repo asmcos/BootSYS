@@ -91,7 +91,10 @@ CPU1 _hart1_entry
    否。CPU1 跑的是 **自己创建的** 线程。
 
 3. **「ISR 里可以随便 `uart_puts`」**  
-   本课打印在线程上下文，并短暂关 `MIE`，避免重入；ISR 本身只做调度。
+   线程里 `print_printf` 入环；CPU0 在 `print_drain_isr` / `print_drain_all` 里搬到 UART，搬一行时短暂关 `MIE`，避免重入交错。
+
+4. **Logo 残缺**  
+   UTF-8 框线不要走 print ring（宽度会截断）；用 `uart_puts` 直打。
 
 ---
 
