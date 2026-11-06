@@ -24,5 +24,10 @@
 | **10** | [10-thread](../10-thread/) | [THREAD_CN.md](../10-thread/docs/THREAD_CN.md) — 双核定时器抢占 + print ring |
 | **11** | [11-thread-comm](../11-thread-comm/) | [THREAD_COMM_CN.md](../11-thread-comm/docs/THREAD_COMM_CN.md) — mailbox；菜单 `c` 测 L1 是否硬件一致 |
 | **12** | [12-atomic](../12-atomic/) | [ATOMIC_CN.md](../12-atomic/docs/ATOMIC_CN.md) — **CPU0×2 线程** 丢更新 / amoswap / amoadd<br>[SPINLOCK_CN.md](../12-atomic/docs/SPINLOCK_CN.md) — 自旋锁 |
+| **13–19** | — | CPU 续课预留（用户态/FPU/中断加深等） |
+| **20** | [20-pinmux](../20-pinmux/) | [PINMUX_CN.md](../20-pinmux/docs/PINMUX_CN.md) — IOMUX 复用 + pad |
+| **21** | [21-gpio](../21-gpio/) | [GPIO_CN.md](../21-gpio/docs/GPIO_CN.md) — GPIO + PLIC 边沿 |
+| **22** | [22-spi](../22-spi/) | [SPI_CN.md](../22-spi/docs/SPI_CN.md) — QSPI0；Flash ID / loopback |
+| **23** | [23-sd](../23-sd/) | [SD_CN.md](../23-sd/docs/SD_CN.md) — SD1 TF 卡；读扇区，写当前 LBA 并留下 |
 
-建议顺序：**环境 → 01 → … → 09 → 10 → 11 → 12**。
+建议顺序：**环境 → 01 → … → 12**（CPU）；外设：**20 → 21 → 22 → 23 → …**。

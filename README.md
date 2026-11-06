@@ -50,3 +50,8 @@ make -C <NN-项目名>          # 例：make -C 01-base-boot
 | **[10-thread](10-thread/)** | 双核定时器抢占线程 + print ring | [THREAD_CN.md](10-thread/docs/THREAD_CN.md) |
 | **[11-thread-comm](11-thread-comm/)** | mailbox + cache 探针（硬件是否一致） | [THREAD_COMM_CN.md](11-thread-comm/docs/THREAD_COMM_CN.md) |
 | **[12-atomic](12-atomic/)** | CPU0×2 线程：丢更新 / amoswap / amoadd | [ATOMIC_CN.md](12-atomic/docs/ATOMIC_CN.md) · [SPINLOCK_CN.md](12-atomic/docs/SPINLOCK_CN.md) |
+| **13–19** | （预留）CPU / 体系续课 | — |
+| **[20-pinmux](20-pinmux/)** | IOMUX 复用 + pad 配置 | [PINMUX_CN.md](20-pinmux/docs/PINMUX_CN.md) |
+| **[21-gpio](21-gpio/)** | GPIO 电平 + 边沿中断 → PLIC | [GPIO_CN.md](21-gpio/docs/GPIO_CN.md) |
+| **[22-spi](22-spi/)** | QSPI0 + pinmux；Flash ID / loopback | [SPI_CN.md](22-spi/docs/SPI_CN.md) |
+| **[23-sd](23-sd/)** | SD1 TF 卡；读扇区，写当前 LBA 并留下 | [SD_CN.md](23-sd/docs/SD_CN.md) |
